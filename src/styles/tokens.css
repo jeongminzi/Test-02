@@ -1,0 +1,154 @@
+/**
+ * Token CSS custom properties — generated to mirror tokens/primitive.ts + tokens/semantic.ts.
+ * UI code uses the semantic (--fg-*, --bg-*, --stroke-*, --radius-*, --shadow-*) classes.
+ * Primitive vars (--primitive-*) exist only so Foundations stories can render the raw scale.
+ */
+
+:root {
+  /* ── Primitive — Gray ──────────────────────────────────────────────────── */
+  --primitive-gray-00: #ffffff;
+  --primitive-gray-100: #f9fafb;
+  --primitive-gray-200: #f3f4f6;
+  --primitive-gray-300: #e5e7eb;
+  --primitive-gray-400: #d1d5db;
+  --primitive-gray-500: #9ca3af;
+  --primitive-gray-600: #6b7280;
+  --primitive-gray-700: #4b5563;
+  --primitive-gray-800: #374151;
+  --primitive-gray-900: #1f2937;
+  --primitive-gray-1000: #111827;
+
+  /* ── Primitive — Rose (brand) ──────────────────────────────────────────── */
+  --primitive-rose-100: #fff4f8;
+  --primitive-rose-200: #fce3ec;
+  --primitive-rose-300: #f9c7d9;
+  --primitive-rose-400: #f199b8;
+  --primitive-rose-500: #ec7aa3;
+  --primitive-rose-600: #e85d93;
+  --primitive-rose-700: #c43c74;
+  --primitive-rose-800: #99285a;
+  --primitive-rose-900: #6f1a3e;
+  --primitive-rose-1000: #450c24;
+
+  /* ── Primitive — Red / Green / Amber / Blue / Yellow ───────────────────── */
+  --primitive-red-100: #fef2f2;
+  --primitive-red-200: #fee2e2;
+  --primitive-red-500: #f87171;
+  --primitive-red-600: #ef4444;
+  --primitive-red-700: #dc2626;
+  --primitive-red-800: #b91c1c;
+
+  --primitive-green-100: #ecfdf5;
+  --primitive-green-200: #d1fae5;
+  --primitive-green-600: #10b981;
+  --primitive-green-700: #059669;
+  --primitive-green-800: #047857;
+
+  --primitive-amber-100: #fffbeb;
+  --primitive-amber-200: #fef3c7;
+  --primitive-amber-300: #fde68a;
+  --primitive-amber-600: #f59e0b;
+  --primitive-amber-700: #d97706;
+  --primitive-amber-800: #b45309;
+
+  --primitive-blue-100: #eff6ff;
+  --primitive-blue-700: #2563eb;
+
+  --primitive-yellow-400: #facc15;
+  --primitive-yellow-500: #eab308;
+
+  /* ── Semantic — Foreground ─────────────────────────────────────────────── */
+  --fg-neutral-solid: var(--primitive-gray-1000);
+  --fg-neutral-contrast: var(--primitive-gray-900);
+  --fg-neutral-muted: var(--primitive-gray-700);
+  --fg-neutral-subtle: var(--primitive-gray-500);
+  --fg-neutral-inverted: var(--primitive-gray-00);
+
+  --fg-brand-solid: var(--primitive-rose-600);
+  --fg-brand-contrast: var(--primitive-rose-700);
+  --fg-brand-muted: var(--primitive-rose-500);
+
+  --fg-critical-solid: var(--primitive-red-600);
+  --fg-critical-contrast: var(--primitive-red-700);
+  --fg-critical-muted: var(--primitive-red-500);
+
+  --fg-positive-solid: var(--primitive-green-700);
+  --fg-positive-contrast: var(--primitive-green-800);
+
+  --fg-warning-solid: var(--primitive-amber-700);
+  --fg-warning-contrast: var(--primitive-amber-800);
+
+  --fg-informative-solid: var(--primitive-blue-700);
+  --fg-rating-solid: var(--primitive-yellow-400);
+
+  /* ── Semantic — Background ─────────────────────────────────────────────── */
+  --bg-layer-default: var(--primitive-gray-00);
+  --bg-layer-canvas: var(--primitive-rose-100);
+  --bg-layer-floating: var(--primitive-gray-00);
+  --bg-layer-overlay: rgba(0, 0, 0, 0.45);
+
+  --bg-neutral-solid: var(--primitive-gray-1000);
+  --bg-neutral-weak: var(--primitive-gray-200);
+  --bg-neutral-subtle: var(--primitive-gray-100);
+  --bg-neutral-muted: var(--primitive-gray-300);
+
+  --bg-brand-solid: var(--primitive-rose-600);
+  --bg-brand-solid-pressed: var(--primitive-rose-700);
+  --bg-brand-weak: var(--primitive-rose-100);
+  --bg-brand-weak-alt: var(--primitive-rose-200);
+
+  --bg-critical-solid: var(--primitive-red-600);
+  --bg-critical-weak: var(--primitive-red-100);
+  --bg-critical-muted: var(--primitive-red-200);
+
+  --bg-positive-solid: var(--primitive-green-600);
+  --bg-positive-weak: var(--primitive-green-100);
+  --bg-positive-muted: var(--primitive-green-200);
+
+  --bg-warning-weak: var(--primitive-amber-200);
+  --bg-warning-muted: var(--primitive-amber-300);
+
+  --bg-informative-weak: var(--primitive-blue-100);
+
+  /* ── Semantic — Stroke ─────────────────────────────────────────────────── */
+  --stroke-neutral-subtle: var(--primitive-gray-200);
+  --stroke-neutral-muted: var(--primitive-gray-300);
+  --stroke-neutral-solid: var(--primitive-gray-500);
+
+  --stroke-brand-solid: var(--primitive-rose-600);
+  --stroke-brand-muted: var(--primitive-rose-300);
+
+  --stroke-critical-solid: var(--primitive-red-600);
+  --stroke-positive-solid: var(--primitive-green-600);
+  --stroke-warning-solid: var(--primitive-amber-600);
+  --stroke-focused: var(--primitive-rose-600);
+
+  /* ── Radius ─────────────────────────────────────────────────────────────── */
+  --radius-none: 0;
+  --radius-control: 8px;
+  --radius-pill: 9999px;
+  --radius-card: 16px;
+  --radius-modal: 20px;
+  --radius-sheet: 28px;
+  --radius-full: 9999px;
+
+  /* ── Shadow ─────────────────────────────────────────────────────────────── */
+  --shadow-none: none;
+  --shadow-card: 0 1px 2px rgba(17, 24, 39, 0.04);
+  --shadow-popover: 0 8px 24px rgba(17, 24, 39, 0.08);
+  --shadow-modal: 0 20px 40px rgba(17, 24, 39, 0.12);
+  --shadow-frame: 0 30px 60px rgba(17, 24, 39, 0.18);
+  --shadow-focus-ring: 0 0 0 3px rgba(232, 93, 147, 0.24);
+
+  /* ── Spacing ───────────────────────────────────────────────────────────── */
+  --space-comp-xs: 4px;
+  --space-comp-sm: 8px;
+  --space-comp-md: 12px;
+  --space-comp-lg: 16px;
+  --space-comp-xl: 20px;
+  --space-comp-2xl: 24px;
+  --space-layout-sm: 16px;
+  --space-layout-md: 24px;
+  --space-layout-lg: 32px;
+  --space-layout-xl: 48px;
+}

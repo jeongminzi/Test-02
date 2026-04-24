@@ -1,29 +1,130 @@
 @import "tailwindcss";
+@import "../src/styles/tokens.css";
 
+/**
+ * Tailwind v4 @theme bridges semantic tokens to utility classes.
+ * UI code should prefer semantic utilities like `bg-brand-solid`,
+ * `text-fg-neutral-solid`, `border-stroke-neutral-subtle`, etc.
+ *
+ * Legacy aliases for the existing primary/warning utilities are kept
+ * so the current draft screens (consumer/business/admin) keep working
+ * until they're refactored to use semantic tokens directly.
+ */
 @theme inline {
-  --color-primary: #e85d93;
-  --color-primary-light: #fce3ec;
-  --color-primary-dark: #c43c74;
-  --color-primary-bg: #fff4f8;
-  --color-warning: #F59E0B;
-  --color-warning-light: #FEF3C7;
-  --color-danger: #EF4444;
-  --color-success: #10B981;
+  /* Semantic foreground */
+  --color-fg-neutral-solid: var(--fg-neutral-solid);
+  --color-fg-neutral-contrast: var(--fg-neutral-contrast);
+  --color-fg-neutral-muted: var(--fg-neutral-muted);
+  --color-fg-neutral-subtle: var(--fg-neutral-subtle);
+  --color-fg-neutral-inverted: var(--fg-neutral-inverted);
+  --color-fg-brand-solid: var(--fg-brand-solid);
+  --color-fg-brand-contrast: var(--fg-brand-contrast);
+  --color-fg-brand-muted: var(--fg-brand-muted);
+  --color-fg-critical-solid: var(--fg-critical-solid);
+  --color-fg-critical-contrast: var(--fg-critical-contrast);
+  --color-fg-critical-muted: var(--fg-critical-muted);
+  --color-fg-positive-solid: var(--fg-positive-solid);
+  --color-fg-positive-contrast: var(--fg-positive-contrast);
+  --color-fg-warning-solid: var(--fg-warning-solid);
+  --color-fg-warning-contrast: var(--fg-warning-contrast);
+  --color-fg-informative-solid: var(--fg-informative-solid);
+  --color-fg-rating-solid: var(--fg-rating-solid);
+
+  /* Semantic background */
+  --color-bg-layer-default: var(--bg-layer-default);
+  --color-bg-layer-canvas: var(--bg-layer-canvas);
+  --color-bg-layer-floating: var(--bg-layer-floating);
+  --color-bg-neutral-solid: var(--bg-neutral-solid);
+  --color-bg-neutral-weak: var(--bg-neutral-weak);
+  --color-bg-neutral-subtle: var(--bg-neutral-subtle);
+  --color-bg-neutral-muted: var(--bg-neutral-muted);
+  --color-bg-brand-solid: var(--bg-brand-solid);
+  --color-bg-brand-solid-pressed: var(--bg-brand-solid-pressed);
+  --color-bg-brand-weak: var(--bg-brand-weak);
+  --color-bg-brand-weak-alt: var(--bg-brand-weak-alt);
+  --color-bg-critical-solid: var(--bg-critical-solid);
+  --color-bg-critical-weak: var(--bg-critical-weak);
+  --color-bg-critical-muted: var(--bg-critical-muted);
+  --color-bg-positive-solid: var(--bg-positive-solid);
+  --color-bg-positive-weak: var(--bg-positive-weak);
+  --color-bg-positive-muted: var(--bg-positive-muted);
+  --color-bg-warning-weak: var(--bg-warning-weak);
+  --color-bg-warning-muted: var(--bg-warning-muted);
+  --color-bg-informative-weak: var(--bg-informative-weak);
+
+  /* Semantic stroke (exposed as border-*) */
+  --color-stroke-neutral-subtle: var(--stroke-neutral-subtle);
+  --color-stroke-neutral-muted: var(--stroke-neutral-muted);
+  --color-stroke-neutral-solid: var(--stroke-neutral-solid);
+  --color-stroke-brand-solid: var(--stroke-brand-solid);
+  --color-stroke-brand-muted: var(--stroke-brand-muted);
+  --color-stroke-critical-solid: var(--stroke-critical-solid);
+  --color-stroke-focused: var(--stroke-focused);
+
+  /* Primitive swatches — referenced ONLY by Foundations stories */
+  --color-primitive-gray-00: var(--primitive-gray-00);
+  --color-primitive-gray-100: var(--primitive-gray-100);
+  --color-primitive-gray-200: var(--primitive-gray-200);
+  --color-primitive-gray-300: var(--primitive-gray-300);
+  --color-primitive-gray-400: var(--primitive-gray-400);
+  --color-primitive-gray-500: var(--primitive-gray-500);
+  --color-primitive-gray-600: var(--primitive-gray-600);
+  --color-primitive-gray-700: var(--primitive-gray-700);
+  --color-primitive-gray-800: var(--primitive-gray-800);
+  --color-primitive-gray-900: var(--primitive-gray-900);
+  --color-primitive-gray-1000: var(--primitive-gray-1000);
+  --color-primitive-rose-100: var(--primitive-rose-100);
+  --color-primitive-rose-200: var(--primitive-rose-200);
+  --color-primitive-rose-300: var(--primitive-rose-300);
+  --color-primitive-rose-400: var(--primitive-rose-400);
+  --color-primitive-rose-500: var(--primitive-rose-500);
+  --color-primitive-rose-600: var(--primitive-rose-600);
+  --color-primitive-rose-700: var(--primitive-rose-700);
+  --color-primitive-rose-800: var(--primitive-rose-800);
+  --color-primitive-rose-900: var(--primitive-rose-900);
+  --color-primitive-rose-1000: var(--primitive-rose-1000);
+
+  /* Radii */
+  --radius-control: 8px;
+  --radius-pill: 9999px;
+  --radius-card: 16px;
+  --radius-modal: 20px;
+  --radius-sheet: 28px;
+
+  /* Shadows */
+  --shadow-card: 0 1px 2px rgba(17, 24, 39, 0.04);
+  --shadow-popover: 0 8px 24px rgba(17, 24, 39, 0.08);
+  --shadow-modal: 0 20px 40px rgba(17, 24, 39, 0.12);
+  --shadow-frame: 0 30px 60px rgba(17, 24, 39, 0.18);
+  --shadow-focus-ring: 0 0 0 3px rgba(232, 93, 147, 0.24);
+
+  /* Legacy aliases — keep current draft screens compiling while they're migrated */
+  --color-primary: var(--primitive-rose-600);
+  --color-primary-light: var(--primitive-rose-200);
+  --color-primary-dark: var(--primitive-rose-700);
+  --color-primary-bg: var(--primitive-rose-100);
+  --color-warning: var(--primitive-amber-600);
+  --color-warning-light: var(--primitive-amber-200);
+  --color-danger: var(--primitive-red-600);
+  --color-success: var(--primitive-green-600);
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #fff7fa;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Pretendard', sans-serif;
+  background: var(--bg-layer-canvas);
   -webkit-font-smoothing: antialiased;
+  color: var(--fg-neutral-solid);
 }
+
+/* ─── Legacy utility classes used across the draft screens ──────────────── */
 
 .policy-badge {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background: #FEF3C7;
-  border: 1px solid #F59E0B;
-  color: #92400E;
+  background: var(--primitive-amber-200);
+  border: 1px solid var(--primitive-amber-600);
+  color: var(--primitive-amber-800);
   font-size: 10px;
   font-weight: 600;
   padding: 2px 8px;
@@ -32,15 +133,15 @@ body {
 
 .policy-area {
   position: relative;
-  border: 2px dashed #F59E0B;
+  border: 2px dashed var(--primitive-amber-600);
   border-radius: 12px;
   background: rgba(245, 158, 11, 0.04);
   padding: 8px;
 }
 
 .badge-best {
-  background: #e85d93;
-  color: white;
+  background: var(--bg-brand-solid);
+  color: var(--fg-neutral-inverted);
   font-size: 10px;
   font-weight: 700;
   padding: 2px 8px;
@@ -48,8 +149,8 @@ body {
 }
 
 .badge-hot {
-  background: #EF4444;
-  color: white;
+  background: var(--bg-critical-solid);
+  color: var(--fg-neutral-inverted);
   font-size: 10px;
   font-weight: 700;
   padding: 2px 8px;
@@ -59,13 +160,13 @@ body {
 .keyword-pill {
   display: inline-flex;
   align-items: center;
-  border: 1.5px solid #e85d93;
-  color: #e85d93;
+  border: 1.5px solid var(--stroke-brand-solid);
+  color: var(--fg-brand-solid);
   font-size: 12px;
   font-weight: 500;
   padding: 4px 12px;
   border-radius: 999px;
-  background: white;
+  background: var(--bg-layer-floating);
   white-space: nowrap;
 }
 
@@ -73,31 +174,20 @@ body {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  border: 2px solid #E5E7EB;
+  border: 2px solid var(--stroke-neutral-muted);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24px;
-  background: white;
+  background: var(--bg-layer-floating);
   transition: all 0.2s;
 }
 .cat-circle.active {
-  border-color: #e85d93;
-  background: #fff4f8;
+  border-color: var(--stroke-brand-solid);
+  background: var(--bg-brand-weak);
 }
 
-.no-scrollbar::-webkit-scrollbar {
-  display: none !important;
-}
-.no-scrollbar {
-  -ms-overflow-style: none !important;
-  scrollbar-width: none !important;
-}
-
-/* Also target overflow-x-auto directly inside the app */
-.overflow-x-auto::-webkit-scrollbar {
-  display: none !important;
-}
-.overflow-x-auto {
-  scrollbar-width: none !important;
-}
+.no-scrollbar::-webkit-scrollbar { display: none !important; }
+.no-scrollbar { -ms-overflow-style: none !important; scrollbar-width: none !important; }
+.overflow-x-auto::-webkit-scrollbar { display: none !important; }
+.overflow-x-auto { scrollbar-width: none !important; }
