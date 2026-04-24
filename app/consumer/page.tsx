@@ -8,6 +8,8 @@ import {
 } from "lucide-react";
 import { useCategories, useHomeKeywords, matchesKeyword, useAds, useRefundMatrix, pickRefundRate, REFUND_PERIOD_LABELS, useCategoryIcons, useNoShowReports, type HomeKeyword } from "../lib/admin-store";
 import { resolveCatIcon } from "../lib/category-icons";
+import { StudioCard } from "../../src/components/molecules/StudioCard";
+import { SectionTitle } from "../../src/components/molecules/SectionTitle";
 
 function BrandMark() {
   return (
@@ -1052,103 +1054,77 @@ export default function ConsumerApp() {
               </div>
 
               <div className="mt-6">
-                <div className="mb-3 flex items-center justify-between px-4">
-                  <div>
-                    <p className="text-[11px] text-gray-400">예약·평점 TOP</p>
-                    <h3 className="text-[15px] font-bold text-gray-900">지금 많이 찾는 스튜디오</h3>
-                  </div>
-                  <button
-                    onClick={() => { setCategoryCat("전체"); setScreen("category"); setTab("category"); }}
-                    className="text-xs font-medium text-gray-400 hover:text-primary">전체보기 →</button>
+                <div className="px-4 mb-3">
+                  <SectionTitle
+                    variant="withAction"
+                    title="지금 많이 찾는 스튜디오"
+                    action={
+                      <button
+                        onClick={() => { setCategoryCat("전체"); setScreen("category"); setTab("category"); }}
+                        className="text-xs font-medium text-gray-400 hover:text-primary"
+                      >
+                        전체보기 →
+                      </button>
+                    }
+                  />
+                  <p className="mt-0.5 text-[11px] text-gray-400">예약·평점 TOP</p>
                 </div>
                 <div className="no-scrollbar flex gap-3 overflow-x-auto px-4 pb-1">
                   {hotStudios.map((studio, index) => (
-                    <button
+                    <StudioCard
                       key={studio.id}
+                      name={studio.name}
+                      location={studio.area}
+                      rating={studio.rating}
+                      reviewCount={studio.paymentCount}
+                      tags={studio.tags.slice(0, 3).map(t => `#${t}`)}
+                      ribbon={index < 3 ? "HOT" : undefined}
+                      ribbonTone="neutral"
+                      imageSlot={
+                        <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-gray-400">
+                          <ImageIcon size={28} strokeWidth={1.5} />
+                        </div>
+                      }
                       onClick={() => openDetail(studio)}
-                      className="flex w-44 shrink-0 flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white text-left shadow-sm"
-                    >
-                      <div className="relative flex h-28 items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 text-gray-400">
-                        <ImageIcon size={28} strokeWidth={1.5} />
-                        {index < 3 && (
-                          <span className="absolute left-2 top-2 rounded-full bg-gray-900 px-2 py-0.5 text-[9px] font-semibold text-white">
-                            HOT
-                          </span>
-                        )}
-                      </div>
-                      <div className="flex flex-1 flex-col p-3">
-                        <p className="truncate text-sm font-semibold text-gray-900">{studio.name}</p>
-                        <div className="mt-1 flex items-center gap-1.5 min-w-0">
-                          <p className="truncate text-[11px] text-gray-400 min-w-0">{studio.area}</p>
-                          {studio.travelAvailable && (
-                            <span className="shrink-0 rounded-full border border-primary/30 bg-primary/5 px-1.5 py-0.5 text-[9px] font-medium text-primary">
-                              출장 가능
-                            </span>
-                          )}
-                        </div>
-                        {studio.tags.length > 0 && (
-                          <div className="mt-1 flex gap-1 flex-wrap">
-                            {studio.tags.slice(0, 3).map(t => (
-                              <span key={t} className="text-[10px] text-primary bg-primary/5 px-1.5 py-0.5 rounded-full">#{t}</span>
-                            ))}
-                          </div>
-                        )}
-                        <div className="mt-auto flex items-center justify-between pt-2 text-[11px] text-gray-500">
-                          <span>예약 {studio.paymentCount}건</span>
-                          <span className="text-yellow-500">★ {studio.rating}</span>
-                        </div>
-                      </div>
-                    </button>
+                    />
                   ))}
                 </div>
               </div>
 
               <div className="mt-6">
-                <div className="mb-3 flex items-center justify-between px-4">
-                  <div>
-                    <p className="text-[11px] text-gray-400">에디터 셀렉션</p>
-                    <h3 className="text-[15px] font-bold text-gray-900">지금 추천하는 스튜디오</h3>
-                  </div>
-                  <button
-                    onClick={() => { setCategoryCat("전체"); setScreen("category"); setTab("category"); }}
-                    className="text-xs font-medium text-gray-400 hover:text-primary">전체보기 →</button>
+                <div className="px-4 mb-3">
+                  <SectionTitle
+                    variant="withAction"
+                    title="지금 추천하는 스튜디오"
+                    action={
+                      <button
+                        onClick={() => { setCategoryCat("전체"); setScreen("category"); setTab("category"); }}
+                        className="text-xs font-medium text-gray-400 hover:text-primary"
+                      >
+                        전체보기 →
+                      </button>
+                    }
+                  />
+                  <p className="mt-0.5 text-[11px] text-gray-400">에디터 셀렉션</p>
                 </div>
                 <div className="no-scrollbar flex gap-3 overflow-x-auto px-4 pb-1">
                   {promotedStudios.map((studio, index) => (
-                    <button
+                    <StudioCard
                       key={studio.id}
+                      name={studio.name}
+                      location={studio.area}
+                      rating={studio.rating}
+                      price={`₩${studio.price.toLocaleString()}`}
+                      tags={studio.tags.slice(0, 3).map(t => `#${t}`)}
+                      ribbon={`AD #${index + 1}`}
+                      ribbonTone="neutral"
+                      imageSlot={
+                        <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-gray-400">
+                          <ImageIcon size={28} strokeWidth={1.5} />
+                        </div>
+                      }
                       onClick={() => openDetail(studio)}
-                      className="flex w-40 shrink-0 flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white text-left shadow-sm"
-                    >
-                      <div className="relative flex h-28 items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 text-gray-400">
-                        <ImageIcon size={28} strokeWidth={1.5} />
-                        <span className="absolute left-2 top-2 rounded-full bg-white/85 px-2 py-0.5 text-[9px] font-semibold text-gray-500">
-                          AD #{index + 1}
-                        </span>
-                      </div>
-                      <div className="flex flex-1 flex-col p-3">
-                        <p className="truncate text-sm font-semibold text-gray-900">{studio.name}</p>
-                        <div className="mt-1 flex items-center gap-1.5 min-w-0">
-                          <p className="truncate text-[11px] text-gray-400 min-w-0">{studio.area}</p>
-                          {studio.travelAvailable && (
-                            <span className="shrink-0 rounded-full border border-primary/30 bg-primary/5 px-1.5 py-0.5 text-[9px] font-medium text-primary">
-                              출장 가능
-                            </span>
-                          )}
-                        </div>
-                        {studio.tags.length > 0 && (
-                          <div className="mt-1 flex gap-1 flex-wrap">
-                            {studio.tags.slice(0, 3).map(t => (
-                              <span key={t} className="text-[10px] text-primary bg-primary/5 px-1.5 py-0.5 rounded-full">#{t}</span>
-                            ))}
-                          </div>
-                        )}
-                        <div className="mt-auto flex items-center justify-between pt-2 text-[11px]">
-                          <span className="font-bold text-gray-900">₩{studio.price.toLocaleString()}</span>
-                          <span className="text-yellow-500">★ {studio.rating}</span>
-                        </div>
-                      </div>
-                    </button>
+                    />
                   ))}
                 </div>
               </div>
