@@ -17,7 +17,7 @@ type Ramp = { name: string; prefix: string; steps: number[] };
 
 const ramps: Ramp[] = [
   { name: "Gray", prefix: "gray", steps: [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000] },
-  { name: "Rose (Brand)", prefix: "rose", steps: [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000] },
+  { name: "Brand (Blue)", prefix: "brand", steps: [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000] },
   { name: "Red (Critical)", prefix: "red", steps: [100, 200, 500, 600, 700, 800] },
   { name: "Green (Positive)", prefix: "green", steps: [100, 200, 600, 700, 800] },
   { name: "Amber (Warning)", prefix: "amber", steps: [100, 200, 300, 600, 700, 800] },

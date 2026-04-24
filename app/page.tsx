@@ -5,9 +5,9 @@ import { Smartphone, Building2, MonitorCog, Sparkles } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-white flex flex-col items-center justify-center p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-sky-50 to-white flex flex-col items-center justify-center p-6">
       <div className="mb-10 flex flex-col items-center text-center">
-        <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-[28px] bg-white shadow-sm ring-1 ring-pink-100">
+        <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-[28px] bg-white shadow-sm ring-1 ring-blue-100">
           <Image src="/photopop-logo.png" alt="포토팟 로고" width={72} height={72} className="h-[72px] w-[72px] object-contain" />
         </div>
         <p className="text-sm text-primary font-medium mb-2">Photopot Prototype</p>
@@ -38,7 +38,7 @@ export default function Home() {
         </Link>
       </div>
 
-      <div className="bg-white rounded-2xl p-5 max-w-4xl w-full border border-pink-100 shadow-sm mb-4">
+      <div className="bg-white rounded-2xl p-5 max-w-4xl w-full border border-blue-100 shadow-sm mb-4">
         <div className="flex items-center gap-2 mb-2">
           <Smartphone size={14} strokeWidth={1.5} className="text-gray-700" /><span className="text-sm font-bold text-gray-900">앱 구조</span>
         </div>
@@ -48,7 +48,7 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="bg-white rounded-2xl p-5 max-w-4xl w-full border border-pink-100 shadow-sm">
+      <div className="bg-white rounded-2xl p-5 max-w-4xl w-full border border-blue-100 shadow-sm">
         <div className="flex items-center gap-2 mb-2">
           <Sparkles size={14} strokeWidth={1.5} className="text-primary" />
           <span className="text-sm font-bold text-gray-900">현재 반영 범위</span>

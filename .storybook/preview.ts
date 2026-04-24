@@ -9,7 +9,7 @@ const preview: Preview = {
     backgrounds: {
       default: "canvas",
       values: [
-        { name: "canvas", value: "#fff7fa" },
+        { name: "canvas", value: "#eff6ff" },
         { name: "surface", value: "#ffffff" },
         { name: "muted", value: "#f9fafb" },
       ],

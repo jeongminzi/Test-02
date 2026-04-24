@@ -25,18 +25,18 @@ export const color = {
     "1000": "#111827", // gray-900
   },
 
-  /** Brand rose/pink family — derived from #E85D93 (observed: #fff4f8, #fce3ec, #e85d93, #c43c74) */
-  rose: {
-    "100": "#fff4f8",
-    "200": "#fce3ec",
-    "300": "#f9c7d9",
-    "400": "#f199b8",
-    "500": "#ec7aa3",
-    "600": "#e85d93",
-    "700": "#c43c74",
-    "800": "#99285a",
-    "900": "#6f1a3e",
-    "1000": "#450c24",
+  /** Brand blue family — re-skinned from rose/pink to blue (primary: #2563eb) */
+  brand: {
+    "100": "#eff6ff",
+    "200": "#dbeafe",
+    "300": "#bfdbfe",
+    "400": "#93c5fd",
+    "500": "#60a5fa",
+    "600": "#3b82f6",
+    "700": "#2563eb",
+    "800": "#1d4ed8",
+    "900": "#1e40af",
+    "1000": "#1e3a8a",
   },
 
   /** Critical / red — errors, cancel */
@@ -158,7 +158,7 @@ export const shadow = {
   lg: "0 8px 24px rgba(17, 24, 39, 0.08)",
   xl: "0 20px 40px rgba(17, 24, 39, 0.12)",
   "2xl": "0 30px 60px rgba(17, 24, 39, 0.18)",
-  focusRing: "0 0 0 3px rgba(232, 93, 147, 0.24)",
+  focusRing: "0 0 0 3px rgba(37, 99, 235, 0.24)",
 } as const;
 
 // ---------------------------------------------------------------------------

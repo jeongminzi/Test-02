@@ -1252,7 +1252,7 @@ export default function AdminWeb() {
                       : "기간 미설정";
                     return (
                     <tr key={b.id} className="border-t border-gray-50">
-                      <td className="p-4"><div className="w-16 h-10 bg-gradient-to-r from-rose-200 to-pink-200 rounded" /></td>
+                      <td className="p-4"><div className="w-16 h-10 bg-gradient-to-r from-blue-200 to-sky-200 rounded" /></td>
                       <td className="p-4 font-medium">{b.title}</td>
                       <td className="p-4 text-gray-500 hidden md:table-cell">{b.position}</td>
                       <td className="p-4 text-gray-500 hidden md:table-cell text-xs">{period}</td>

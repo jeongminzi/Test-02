@@ -73,16 +73,16 @@
   --color-primitive-gray-800: var(--primitive-gray-800);
   --color-primitive-gray-900: var(--primitive-gray-900);
   --color-primitive-gray-1000: var(--primitive-gray-1000);
-  --color-primitive-rose-100: var(--primitive-rose-100);
-  --color-primitive-rose-200: var(--primitive-rose-200);
-  --color-primitive-rose-300: var(--primitive-rose-300);
-  --color-primitive-rose-400: var(--primitive-rose-400);
-  --color-primitive-rose-500: var(--primitive-rose-500);
-  --color-primitive-rose-600: var(--primitive-rose-600);
-  --color-primitive-rose-700: var(--primitive-rose-700);
-  --color-primitive-rose-800: var(--primitive-rose-800);
-  --color-primitive-rose-900: var(--primitive-rose-900);
-  --color-primitive-rose-1000: var(--primitive-rose-1000);
+  --color-primitive-brand-100: var(--primitive-brand-100);
+  --color-primitive-brand-200: var(--primitive-brand-200);
+  --color-primitive-brand-300: var(--primitive-brand-300);
+  --color-primitive-brand-400: var(--primitive-brand-400);
+  --color-primitive-brand-500: var(--primitive-brand-500);
+  --color-primitive-brand-600: var(--primitive-brand-600);
+  --color-primitive-brand-700: var(--primitive-brand-700);
+  --color-primitive-brand-800: var(--primitive-brand-800);
+  --color-primitive-brand-900: var(--primitive-brand-900);
+  --color-primitive-brand-1000: var(--primitive-brand-1000);
 
   /* Radii */
   --radius-control: 8px;
@@ -96,13 +96,13 @@
   --shadow-popover: 0 8px 24px rgba(17, 24, 39, 0.08);
   --shadow-modal: 0 20px 40px rgba(17, 24, 39, 0.12);
   --shadow-frame: 0 30px 60px rgba(17, 24, 39, 0.18);
-  --shadow-focus-ring: 0 0 0 3px rgba(232, 93, 147, 0.24);
+  --shadow-focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.24);
 
   /* Legacy aliases — keep current draft screens compiling while they're migrated */
-  --color-primary: var(--primitive-rose-600);
-  --color-primary-light: var(--primitive-rose-200);
-  --color-primary-dark: var(--primitive-rose-700);
-  --color-primary-bg: var(--primitive-rose-100);
+  --color-primary: var(--primitive-brand-600);
+  --color-primary-light: var(--primitive-brand-200);
+  --color-primary-dark: var(--primitive-brand-700);
+  --color-primary-bg: var(--primitive-brand-100);
   --color-warning: var(--primitive-amber-600);
   --color-warning-light: var(--primitive-amber-200);
   --color-danger: var(--primitive-red-600);

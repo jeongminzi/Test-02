@@ -28,19 +28,19 @@ type Tab = "home" | "category" | "my";
 
 const HOME_AD_PAGES = [
   [
-    { title: "로맨틱 웨딩", subtitle: "대표 추천 노출", tone: "from-rose-100 to-pink-100" },
-    { title: "프로필 촬영", subtitle: "인기 작가 큐레이션", tone: "from-pink-50 to-rose-100" },
-    { title: "가족 촬영", subtitle: "주말 예약 인기", tone: "from-orange-50 to-rose-100" },
+    { title: "로맨틱 웨딩", subtitle: "대표 추천 노출", tone: "from-blue-100 to-sky-100" },
+    { title: "프로필 촬영", subtitle: "인기 작가 큐레이션", tone: "from-sky-50 to-blue-100" },
+    { title: "가족 촬영", subtitle: "주말 예약 인기", tone: "from-cyan-50 to-blue-100" },
   ],
   [
-    { title: "커플 촬영", subtitle: "야외 스냅 추천", tone: "from-fuchsia-50 to-pink-100" },
-    { title: "아기 촬영", subtitle: "성장 기록 남기기", tone: "from-rose-50 to-orange-100" },
-    { title: "바디프로필", subtitle: "성수 인기 스튜디오", tone: "from-pink-100 to-rose-200" },
+    { title: "커플 촬영", subtitle: "야외 스냅 추천", tone: "from-indigo-50 to-sky-100" },
+    { title: "아기 촬영", subtitle: "성장 기록 남기기", tone: "from-blue-50 to-cyan-100" },
+    { title: "바디프로필", subtitle: "성수 인기 스튜디오", tone: "from-sky-100 to-blue-200" },
   ],
   [
-    { title: "비즈니스 촬영", subtitle: "브랜드/팀 프로필 추천", tone: "from-rose-50 to-pink-100" },
+    { title: "비즈니스 촬영", subtitle: "브랜드/팀 프로필 추천", tone: "from-blue-50 to-sky-100" },
     { title: "반려동물 촬영", subtitle: "반려 가족과 함께", tone: "from-neutral-100 to-stone-100" },
-    { title: "가족 패키지", subtitle: "3인 이상 촬영 추천", tone: "from-pink-50 to-amber-50" },
+    { title: "가족 패키지", subtitle: "3인 이상 촬영 추천", tone: "from-sky-50 to-amber-50" },
   ],
 ];
 
@@ -704,7 +704,7 @@ export default function BusinessApp() {
 
               {/* 스튜디오 리스트 상단 광고 배너 (REQ-113) */}
               <div className="mb-3 overflow-hidden rounded-xl">
-                <div className="bg-gradient-to-r from-rose-100 to-pink-200 rounded-xl p-4 flex items-center gap-3 relative">
+                <div className="bg-gradient-to-r from-blue-100 to-sky-200 rounded-xl p-4 flex items-center gap-3 relative">
                   <span className="absolute top-2 left-2 bg-primary/80 text-white text-[9px] px-2 py-0.5 rounded font-medium">AD</span>
                   <div className="w-14 h-14 bg-white/60 rounded-lg flex items-center justify-center shrink-0 text-gray-400"><ImageIcon size={22} strokeWidth={1.5} /></div>
                   <div>

@@ -25,7 +25,9 @@
 두 계층입니다. **UI 코드는 오직 semantic 토큰만 참조**합니다.
 
 ### Primitive (`tokens/primitive.ts` + CSS vars `--primitive-*`)
-원시 ramp만 — gray 00–1000, rose 100–1000 (brand), red/green/amber/blue는 실제로 쓰이는 step만. 의미 없음.
+원시 ramp만 — gray 00–1000, **brand 100–1000 (blue)**, red/green/amber/blue(informative)는 실제로 쓰이는 step만. 의미 없음.
+
+> 2026-04-24 브랜드 색 변경: rose/pink(#E85D93) → blue(#2563eb). Primitive 한 군데 바꾸고 semantic 토큰이 전체에 전파 — two-layer 시스템의 목적이 바로 이것.
 
 ### Semantic (`tokens/semantic.ts` + CSS vars `--fg-*`, `--bg-*`, `--stroke-*`)
 의미 기반 매핑. 이름 규칙:
@@ -42,9 +44,9 @@
 | Semantic | Primitive | 용도 |
 |---|---|---|
 | `fg.neutral-solid` | `gray.1000` | 본문 텍스트 |
-| `fg.brand-solid` | `rose.600` | 브랜드 색 텍스트/아이콘 |
-| `bg.brand-solid` | `rose.600` | 주요 CTA 배경 |
-| `bg.brand-solid-pressed` | `rose.700` | 주요 CTA 눌림 상태 |
+| `fg.brand-solid` | `brand.700` (#2563eb) | 브랜드 색 텍스트/아이콘 |
+| `bg.brand-solid` | `brand.600` (#3b82f6) | 주요 CTA 배경 |
+| `bg.brand-solid-pressed` | `brand.700` | 주요 CTA 눌림 상태 |
 | `bg.critical-weak` | `red.100` | 에러 박스 배경 |
 | `stroke.neutral-subtle` | `gray.200` | 카드 테두리 |
 
@@ -55,7 +57,7 @@ UI에서 primitive를 직접 쓰고 싶으면 그건 semantic이 빠졌다는 �
 | Family | 사용 범위 | Steps |
 |---|---|---|
 | `gray` | 배경·본문·보더 전반 | 00, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000 |
-| `rose` | **브랜드** (#E85D93) | 100–1000 |
+| `brand` | **브랜드** (blue, #2563eb) | 100–1000 |
 | `red` | critical, 취소, 노쇼 | 100, 200, 500, 600, 700, 800 |
 | `green` | positive, 확정, 정산 완료 | 100, 200, 600, 700, 800 |
 | `amber` | warning, 대기 상태 | 100, 200, 300, 600, 700, 800 |

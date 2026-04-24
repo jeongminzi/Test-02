@@ -22,9 +22,9 @@ export const fg = {
   "neutral-subtle": color.gray["500"],
   "neutral-inverted": color.gray["00"],
 
-  "brand-solid": color.rose["600"],
-  "brand-contrast": color.rose["700"],
-  "brand-muted": color.rose["500"],
+  "brand-solid": color.brand["600"],
+  "brand-contrast": color.brand["700"],
+  "brand-muted": color.brand["500"],
 
   "critical-solid": color.red["600"],
   "critical-contrast": color.red["700"],
@@ -48,7 +48,7 @@ export const fg = {
 export const bg = {
   /** Layer: page canvas and floating surfaces */
   "layer-default": color.gray["00"],
-  "layer-canvas": color.rose["100"], // app background (#fff7fa from globals)
+  "layer-canvas": color.brand["100"], // app canvas (brand light)
   "layer-floating": color.gray["00"],
   "layer-overlay": "rgba(0, 0, 0, 0.45)",
 
@@ -59,10 +59,10 @@ export const bg = {
   "neutral-muted": color.gray["300"],
 
   /** Brand fills */
-  "brand-solid": color.rose["600"],
-  "brand-solid-pressed": color.rose["700"],
-  "brand-weak": color.rose["100"],
-  "brand-weak-alt": color.rose["200"],
+  "brand-solid": color.brand["600"],
+  "brand-solid-pressed": color.brand["700"],
+  "brand-weak": color.brand["100"],
+  "brand-weak-alt": color.brand["200"],
 
   /** Critical */
   "critical-solid": color.red["600"],
@@ -91,14 +91,14 @@ export const stroke = {
   "neutral-muted": color.gray["300"],
   "neutral-solid": color.gray["500"],
 
-  "brand-solid": color.rose["600"],
-  "brand-muted": color.rose["300"],
+  "brand-solid": color.brand["600"],
+  "brand-muted": color.brand["300"],
 
   "critical-solid": color.red["600"],
   "positive-solid": color.green["600"],
   "warning-solid": color.amber["600"],
 
-  focused: color.rose["600"],
+  focused: color.brand["600"],
 } as const;
 
 // ---------------------------------------------------------------------------
