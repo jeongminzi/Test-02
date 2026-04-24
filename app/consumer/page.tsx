@@ -10,6 +10,13 @@ import { useCategories, useHomeKeywords, matchesKeyword, useAds, useRefundMatrix
 import { resolveCatIcon } from "../lib/category-icons";
 import { StudioCard } from "../../src/components/molecules/StudioCard";
 import { SectionTitle } from "../../src/components/molecules/SectionTitle";
+import { AppHeader } from "../../src/components/organisms/AppHeader";
+import { AppBottomTab, TabKey } from "../../src/components/organisms/AppBottomTab";
+import { FilterChipGroup } from "../../src/components/molecules/FilterChipGroup";
+import { Button } from "../../src/components/atoms/Button";
+import { BottomSheet } from "../../src/components/organisms/BottomSheet";
+import { Textarea } from "../../src/components/atoms/Textarea";
+import { Badge } from "../../src/components/atoms/Badge";
 
 function BrandMark() {
   return (
@@ -913,23 +920,16 @@ export default function ConsumerApp() {
 
         {/* Header */}
         {showHeader && (
-          <div className="relative z-10 bg-white pt-5 pl-4 pr-4 pb-2">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                {screen !== "home" && <button onClick={goBack} className="text-gray-500 text-lg flex items-center justify-center -mr-1">‹</button>}
-                <button onClick={() => { setScreen("home"); setTab("home"); }} className="flex items-center">
-                  <BrandMark />
-                </button>
-              </div>
-              <button onClick={() => navigate("notifications")} className="text-gray-500 relative p-1">
-                <Bell size={20} strokeWidth={1.5} />
-                {(CONSUMER_NOTIFICATIONS.some(n => !n.read) || noShowReports.some(r => r.consumerName === userName)) && <span className="absolute top-0.5 right-0.5 w-2 h-2 bg-red-500 rounded-full" />}
-              </button>
-            </div>
-          </div>
+          <AppHeader
+            variant="brand"
+            onBack={screen !== "home" ? goBack : undefined}
+            onBrandClick={() => { setScreen("home"); setTab("home"); }}
+            hasNotifications={CONSUMER_NOTIFICATIONS.some(n => !n.read) || noShowReports.some(r => r.consumerName === userName)}
+            onBellClick={() => navigate("notifications")}
+          />
         )}
 
-        <div ref={scrollRef} className="overflow-y-auto bg-white" style={{ height: showHeader ? "calc(780px - 64px - 56px)" : "calc(780px - 56px)" }}>
+        <div ref={scrollRef} className="overflow-y-auto bg-white" style={{ height: showHeader ? "calc(780px - 56px - 56px)" : "calc(780px - 56px)" }}>
 
           {/* ===== HOME (IA-010) ===== */}
           {screen === "home" && (
@@ -1489,7 +1489,7 @@ export default function ConsumerApp() {
                   <a href={`tel:${selectedStudio.phone}`} className="flex items-center justify-center w-14 h-12 border border-gray-300 rounded-xl text-gray-500 shrink-0">
                     <Phone size={18} strokeWidth={1.5} />
                   </a>
-                  <button onClick={() => navigate("booking")} className="flex-1 bg-primary text-white py-3.5 rounded-xl font-bold text-sm">예약하기</button>
+                  <Button size="lg" className="flex-1" onClick={() => navigate("booking")}>예약하기</Button>
                 </div>
               </div>
             </div>
@@ -1519,7 +1519,7 @@ export default function ConsumerApp() {
                 <p className="text-[11px] text-gray-400 pt-1">예약금 결제 후 업체 승인 시 확정되며, 영업일 기준 48시간 내 미승인 시 자동 취소 및 전액 환불됩니다.</p>
               </div>
 
-              <button onClick={() => navigate("done")} className="w-full bg-primary text-white py-3.5 rounded-xl font-bold text-sm">결제하기 · 토스페이먼츠</button>
+              <Button fullWidth size="lg" onClick={() => navigate("done")}>결제하기 · 토스페이먼츠</Button>
             </div>
           )}
 
@@ -1535,8 +1535,8 @@ export default function ConsumerApp() {
                 <p className="text-sm font-bold text-gray-900 mt-1">₩{totalPrice.toLocaleString()}</p>
                 <p className="text-[11px] text-gray-500 mt-2">업체 승인 후 예약이 확정되며, 영업일 기준 48시간 내 미승인 시 자동 취소 및 전액 환불됩니다.</p>
               </div>
-              <button onClick={() => { setScreen("myBookings"); setTab("mypage"); }} className="w-full bg-gray-100 text-gray-700 py-3 rounded-xl font-medium text-sm mb-2">예약 요청 내역 확인</button>
-              <button onClick={() => { setScreen("home"); setTab("home"); }} className="w-full bg-primary text-white py-3 rounded-xl font-bold text-sm">홈으로</button>
+              <Button variant="secondary" fullWidth className="mb-2" onClick={() => { setScreen("myBookings"); setTab("mypage"); }}>예약 요청 내역 확인</Button>
+              <Button fullWidth onClick={() => { setScreen("home"); setTab("home"); }}>홈으로</Button>
             </div>
           )}
 
@@ -1544,10 +1544,26 @@ export default function ConsumerApp() {
           {screen === "myBookings" && (
             <div className="p-4">
               <h2 className="text-base font-bold mb-4">내 예약</h2>
-              <div className="flex gap-2 mb-4">
-                {(["예정", "완료", "취소"] as BookingFilter[]).map(f => (
-                  <button key={f} onClick={() => setBookingFilter(f)} className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${bookingFilter === f ? "bg-primary text-white" : "bg-gray-100 text-gray-500"}`}>{f} {f === "예정" ? upcomingBookings.length : f === "완료" ? COMPLETED_BOOKINGS.length : CANCELLED_BOOKINGS.length}</button>
-                ))}
+              <div className="mb-4">
+                {(() => {
+                  const counts = {
+                    "예정": upcomingBookings.length,
+                    "완료": COMPLETED_BOOKINGS.length,
+                    "취소": CANCELLED_BOOKINGS.length,
+                  } as const;
+                  const options = (["예정", "완료", "취소"] as BookingFilter[]).map(f => `${f} ${counts[f]}`);
+                  const currentLabel = `${bookingFilter} ${counts[bookingFilter]}`;
+                  return (
+                    <FilterChipGroup
+                      options={options}
+                      value={currentLabel}
+                      onChange={label => {
+                        const f = label.split(" ")[0] as BookingFilter;
+                        setBookingFilter(f);
+                      }}
+                    />
+                  );
+                })()}
               </div>
               {bookingFilter === "완료" && <p className="text-[11px] text-gray-400 mb-3">리뷰는 업체가 촬영 건을 완료 처리한 시점부터 2주 이내 작성, 작성 후 3일 이내 수정 가능합니다.</p>}
               {bookingFilter === "취소" && (
@@ -1567,7 +1583,19 @@ export default function ConsumerApp() {
                 >
                   <div className="flex justify-between items-start mb-2">
                     <div><p className="text-sm font-bold">{b.studio}</p><p className="text-xs text-gray-400 mt-0.5">{b.cat} · {b.date}</p><p className="text-xs text-gray-400">{b.time}</p></div>
-                    <span className={`text-[10px] px-2.5 py-1 rounded-full font-medium ${statusColor(b.status)}`}>{b.status}</span>
+                    <Badge
+                      tone={
+                        b.status === "확정" || b.status === "대기"
+                          ? "positive"
+                          : b.status === "완료"
+                            ? "neutral"
+                            : b.status === "예약 취소 중"
+                              ? "warning"
+                              : "critical"
+                      }
+                    >
+                      {b.status}
+                    </Badge>
                   </div>
                   {b.status === "예약 취소 중" && cancelReason && (
                     <div className="bg-amber-50 border border-amber-100 rounded-lg px-2.5 py-1.5 mb-2">
@@ -1579,11 +1607,14 @@ export default function ConsumerApp() {
                     <span className="text-sm font-bold">{b.price}</span>
                     <div className="flex items-center gap-2">
                       {bookingFilter === "예정" && b.status !== "예약 취소 중" && (
-                        <button
+                        <Button
+                          variant="ghost"
+                          size="sm"
                           onClick={(e) => { e.stopPropagation(); setCancelModal({ idx: i, studio: b.studio }); setCancelReasonInput(""); }}
-                          className="text-xs text-red-500 bg-red-50 px-2.5 py-1 rounded-full font-medium">
+                          className="!text-fg-critical-solid !bg-bg-critical-weak hover:!bg-bg-critical-muted"
+                        >
                           예약 취소
-                        </button>
+                        </Button>
                       )}
                       {bookingFilter === "예정" && b.status === "예약 취소 중" && (
                         <span className="text-[10px] text-amber-600">업체 승인 대기 중</span>
@@ -1669,18 +1700,21 @@ export default function ConsumerApp() {
                   <p className="text-[10px] text-gray-400">{cancelReasonInput.length}/200</p>
                 </div>
                 <div className="flex gap-2">
-                  <button onClick={() => setCancelModal(null)}
-                    className="flex-1 bg-gray-100 text-gray-600 py-3 rounded-xl text-sm font-medium">돌아가기</button>
-                  <button
+                  <Button variant="secondary" fullWidth onClick={() => setCancelModal(null)}>
+                    돌아가기
+                  </Button>
+                  <Button
+                    variant="danger"
+                    fullWidth
+                    disabled={cancelReasonInput.trim().length < 5}
                     onClick={() => {
                       setUpcomingBookings(prev => prev.map((bk, j) => j === cancelModal.idx ? { ...bk, status: "예약 취소 중", cancelReason: cancelReasonInput.trim() } : bk));
                       setCancelModal(null);
                       setCancelReasonInput("");
                     }}
-                    disabled={cancelReasonInput.trim().length < 5}
-                    className={`flex-1 py-3 rounded-xl text-sm font-bold ${cancelReasonInput.trim().length >= 5 ? "bg-red-500 text-white" : "bg-gray-200 text-gray-400"}`}>
+                  >
                     취소 요청
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -1704,7 +1738,14 @@ export default function ConsumerApp() {
                   <p className="text-[10px] text-gray-400">{reviewText.length}/300</p>
                 </div>
               </div>
-              <button onClick={() => { setScreen("myBookings"); setTab("mypage"); }} disabled={reviewText.trim().length < 30} className={`w-full py-3.5 rounded-xl font-bold text-sm ${reviewText.trim().length >= 30 ? "bg-primary text-white" : "bg-gray-200 text-gray-400"}`}>리뷰 등록</button>
+              <Button
+                fullWidth
+                size="lg"
+                disabled={reviewText.trim().length < 30}
+                onClick={() => { setScreen("myBookings"); setTab("mypage"); }}
+              >
+                리뷰 등록
+              </Button>
             </div>
           )}
 
@@ -1744,8 +1785,8 @@ export default function ConsumerApp() {
                 </div>
               </div>
               <div className="flex gap-2">
-                <button onClick={() => setEditingReviewIdx(null)} className="flex-1 bg-gray-100 text-gray-600 py-3 rounded-xl font-medium text-sm">취소</button>
-                <button onClick={() => setEditingReviewIdx(null)} disabled={editReviewText.trim().length < 30} className={`flex-1 py-3 rounded-xl font-bold text-sm ${editReviewText.trim().length >= 30 ? "bg-primary text-white" : "bg-gray-200 text-gray-400"}`}>수정 완료</button>
+                <Button variant="secondary" fullWidth onClick={() => setEditingReviewIdx(null)}>취소</Button>
+                <Button fullWidth disabled={editReviewText.trim().length < 30} onClick={() => setEditingReviewIdx(null)}>수정 완료</Button>
               </div>
             </div>
           )}
@@ -1875,7 +1916,7 @@ export default function ConsumerApp() {
 
               <input type="email" placeholder="이메일" className="w-full bg-gray-50 rounded-xl px-4 py-3 text-sm outline-none border border-gray-200 mb-2" />
               <input type="password" placeholder="비밀번호" className="w-full bg-gray-50 rounded-xl px-4 py-3 text-sm outline-none border border-gray-200 mb-4" />
-              <button onClick={() => { setScreen("home"); setTab("home"); }} className="w-full bg-primary text-white py-3 rounded-xl font-bold text-sm mb-4">로그인</button>
+              <Button fullWidth className="mb-4" onClick={() => { setScreen("home"); setTab("home"); }}>로그인</Button>
 
               <div className="flex items-center gap-4 text-xs text-gray-400">
                 <button onClick={() => navigate("signup")}>회원가입</button>
@@ -1884,7 +1925,7 @@ export default function ConsumerApp() {
               </div>
 
               <div className="mt-8 w-full">
-                <button onClick={() => navigate("bizSignup")} className="w-full border border-primary text-primary py-3 rounded-xl font-medium text-sm">🏢 업체 회원가입</button>
+                <Button variant="outline" fullWidth onClick={() => navigate("bizSignup")}>🏢 업체 회원가입</Button>
               </div>
             </div>
           )}
@@ -1922,8 +1963,13 @@ export default function ConsumerApp() {
               <button className="w-full bg-[#03C75A] text-white py-3 rounded-xl font-bold text-sm mb-2">🟢 네이버로 가입</button>
               <button className="w-full bg-white border border-gray-200 text-gray-700 py-3 rounded-xl font-bold text-sm mb-6">G 구글로 가입</button>
 
-              <button onClick={() => { if (agreeTerms && agreePrivacy) { setScreen("home"); setTab("home"); } }} disabled={!agreeTerms || !agreePrivacy}
-                className={`w-full py-3 rounded-xl font-bold text-sm ${agreeTerms && agreePrivacy ? "bg-primary text-white" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}>가입 완료</button>
+              <Button
+                fullWidth
+                disabled={!agreeTerms || !agreePrivacy}
+                onClick={() => { if (agreeTerms && agreePrivacy) { setScreen("home"); setTab("home"); } }}
+              >
+                가입 완료
+              </Button>
             </div>
           )}
 
@@ -1963,7 +2009,7 @@ export default function ConsumerApp() {
                 </label>
               </div>
 
-              <button onClick={() => { setScreen("login"); }} className="w-full bg-primary text-white py-3.5 rounded-xl font-bold text-sm mb-3">가입 신청</button>
+              <Button fullWidth size="lg" className="mb-3" onClick={() => { setScreen("login"); }}>가입 신청</Button>
 
               <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
                 <p className="text-xs font-bold text-amber-700 mb-1">📋 승인 안내</p>
@@ -1985,7 +2031,7 @@ export default function ConsumerApp() {
                 <p className="text-xs text-gray-500 mb-1">이메일</p>
                 <input type="email" placeholder="email@example.com" className="w-full bg-gray-50 rounded-xl px-4 py-3 text-sm outline-none border border-gray-200" />
               </div>
-              <button onClick={goBack} className="w-full bg-primary text-white py-3.5 rounded-xl font-bold text-sm mb-4">비밀번호 재설정 링크 발송</button>
+              <Button fullWidth size="lg" className="mb-4" onClick={goBack}>비밀번호 재설정 링크 발송</Button>
               <p className="text-center text-[10px] text-gray-400">입력한 이메일로 비밀번호 재설정 링크가 전송됩니다</p>
             </div>
           )}
@@ -2042,43 +2088,54 @@ export default function ConsumerApp() {
 
         {/* Bottom Tab — IA: 홈/카테고리/마이페이지 */}
         {showHeader && (
-          <div className="absolute bottom-0 left-0 right-0 h-14 bg-white border-t border-gray-100 flex items-center z-10">
-            {[
-              { key: "home" as Tab, Icon: Home, label: "홈", s: "home" as Screen },
-              { key: "category" as Tab, Icon: LayoutGrid, label: "카테고리", s: "category" as Screen },
-              { key: "mypage" as Tab, Icon: User, label: "MY", s: "mypage" as Screen },
-            ].map(t => (
-              <button key={t.key} onClick={() => { setTab(t.key); setScreen(t.s); }}
-                className={`flex-1 flex flex-col items-center justify-center gap-0.5 ${tab === t.key ? "text-primary" : "text-gray-400"}`}>
-                <t.Icon size={20} strokeWidth={1.5} />
-                <span className="text-[10px]">{t.label}</span>
-              </button>
-            ))}
+          <div className="absolute bottom-0 left-0 right-0 z-10">
+            <AppBottomTab
+              active={tab as TabKey}
+              onChange={(key) => {
+                setTab(key as Tab);
+                setScreen(key as Screen);
+              }}
+            />
           </div>
         )}
 
-        {deleteRequestIdx !== null && (
-          <div className="absolute inset-0 z-30 flex items-end bg-black/45">
-            <div className="w-full rounded-t-3xl bg-white p-5 pb-8">
-              <div className="mb-4 flex items-center justify-between">
-                <h3 className="text-base font-bold">리뷰 삭제 요청</h3>
-                <button onClick={() => { setDeleteRequestIdx(null); setDeleteRequestReason(""); }} className="text-sm text-gray-400">닫기</button>
-              </div>
-              <div className="mb-4 rounded-xl bg-gray-50 p-4">
+        <BottomSheet
+          open={deleteRequestIdx !== null}
+          onClose={() => { setDeleteRequestIdx(null); setDeleteRequestReason(""); }}
+          title="리뷰 삭제 요청"
+          footer={
+            <>
+              <Button variant="secondary" fullWidth onClick={() => { setDeleteRequestIdx(null); setDeleteRequestReason(""); }}>
+                취소
+              </Button>
+              <Button
+                fullWidth
+                disabled={!deleteRequestReason.trim()}
+                onClick={() => { setDeleteRequestIdx(null); setDeleteRequestReason(""); }}
+              >
+                삭제 요청 제출
+              </Button>
+            </>
+          }
+        >
+          {deleteRequestIdx !== null && (
+            <>
+              <div className="mb-4 rounded-xl bg-bg-neutral-subtle p-4">
                 <p className="text-sm font-bold">{MY_REVIEWS_DATA[deleteRequestIdx].studio}</p>
-                <p className="mt-1 text-[11px] text-gray-400">삭제는 바로 처리되지 않고, 사유 확인 후 어드민 승인으로 진행됩니다.</p>
+                <p className="mt-1 text-[11px] text-fg-neutral-subtle">
+                  삭제는 바로 처리되지 않고, 사유 확인 후 어드민 승인으로 진행됩니다.
+                </p>
               </div>
-              <div className="mb-5">
-                <label className="mb-2 block text-sm font-medium">삭제 요청 사유</label>
-                <textarea value={deleteRequestReason} onChange={e => setDeleteRequestReason(e.target.value)} placeholder="삭제를 요청하는 이유를 입력해주세요" className="w-full resize-none rounded-xl border border-gray-200 bg-gray-50 p-4 text-sm outline-none focus:border-primary" rows={4} />
-              </div>
-              <div className="flex gap-2">
-                <button onClick={() => { setDeleteRequestIdx(null); setDeleteRequestReason(""); }} className="flex-1 rounded-xl bg-gray-100 py-3 text-sm font-medium text-gray-600">취소</button>
-                <button onClick={() => { setDeleteRequestIdx(null); setDeleteRequestReason(""); }} disabled={!deleteRequestReason.trim()} className={`flex-1 rounded-xl py-3 text-sm font-bold ${deleteRequestReason.trim() ? "bg-primary text-white" : "bg-gray-200 text-gray-400"}`}>삭제 요청 제출</button>
-              </div>
-            </div>
-          </div>
-        )}
+              <label className="mb-2 block text-sm font-medium">삭제 요청 사유</label>
+              <Textarea
+                value={deleteRequestReason}
+                onChange={e => setDeleteRequestReason(e.target.value)}
+                placeholder="삭제를 요청하는 이유를 입력해주세요"
+                rows={4}
+              />
+            </>
+          )}
+        </BottomSheet>
       </div>
     </div>
   );

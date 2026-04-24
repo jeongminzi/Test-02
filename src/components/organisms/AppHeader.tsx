@@ -14,8 +14,13 @@ export interface AppHeaderProps {
   variant?: AppHeaderVariant;
   /** Title string, used with variant="titled". */
   title?: string;
-  /** Called when the back button is clicked. */
+  /**
+   * Called when the back button is clicked.
+   * For variant="brand", providing onBack also renders a small "‹" back button before the BrandMark.
+   */
   onBack?: () => void;
+  /** Optional click handler for the BrandMark (typically: navigate home). */
+  onBrandClick?: () => void;
   /** Override default bell icon (e.g., suppress on auth screens). */
   trailing?: ReactNode;
   /** Show red dot on bell. */
@@ -28,6 +33,7 @@ export function AppHeader({
   variant = "brand",
   title,
   onBack,
+  onBrandClick,
   trailing,
   hasNotifications = false,
   onBellClick,
@@ -65,7 +71,24 @@ export function AppHeader({
             )}
           </>
         ) : (
-          <BrandMark size="sm" />
+          <>
+            {onBack && (
+              <button
+                aria-label="뒤로가기"
+                onClick={onBack}
+                className="text-fg-neutral-subtle text-lg flex items-center justify-center -mr-1 hover:text-fg-neutral-muted"
+              >
+                ‹
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={onBrandClick}
+              className="flex items-center"
+            >
+              <BrandMark size="sm" />
+            </button>
+          </>
         )}
       </div>
       <div className="shrink-0">{defaultTrailing}</div>

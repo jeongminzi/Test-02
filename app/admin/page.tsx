@@ -3,6 +3,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { Users, Building2, Calendar, DollarSign, ImageIcon, X } from "lucide-react";
 import PolicyForm from "../components/PolicyForm";
+import { Button } from "../../src/components/atoms/Button";
+import { Badge } from "../../src/components/atoms/Badge";
+import { Chip } from "../../src/components/atoms/Chip";
 import {
   useCategories,
   useRegions,
@@ -553,7 +556,7 @@ export default function AdminWeb() {
               </div>
               <div className="mt-3 flex items-center justify-between">
                 <p className="text-[10px] text-gray-400">※ 기본값은 업계 표준 기준 임시 세팅. 대표 확인 후 확정.</p>
-                <button className="bg-primary text-white px-4 py-2 rounded-lg text-xs font-medium">저장</button>
+                <Button size="sm">저장</Button>
               </div>
             </div>
 
@@ -639,7 +642,7 @@ export default function AdminWeb() {
                       <td className="p-4">
                         {b.status === "승인대기" ? (
                           <div className="flex gap-1 flex-wrap">
-                            <button className="text-xs bg-primary text-white px-3 py-1 rounded-lg">승인</button>
+                            <Button size="sm">승인</Button>
                             <button className="text-xs bg-gray-200 text-gray-600 px-3 py-1 rounded-lg">거절</button>
                             <button onClick={() => { setBizDetail(bForModal); setBizDetailView("portfolio"); }} className="text-xs text-primary px-2 py-1"><ImageIcon size={12} strokeWidth={1.5} className="inline" /> 사진({b.photos})</button>
                           </div>
@@ -1030,7 +1033,7 @@ export default function AdminWeb() {
               <div className="bg-white rounded-xl shadow-sm p-4">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="text-sm font-bold">종류별 카테고리</h3>
-                  <button onClick={addCategory} className="text-xs bg-primary text-white px-3 py-1.5 rounded-lg font-medium">+ 추가</button>
+                  <Button size="sm" onClick={addCategory}>+ 추가</Button>
                 </div>
                 {categories.map((c, i) => {
                   const currentKey = categoryIcons[c] ?? DEFAULT_CAT_ICON_KEY[c] ?? "image";
@@ -1114,7 +1117,7 @@ export default function AdminWeb() {
               <div className="bg-white rounded-xl shadow-sm p-4">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="text-sm font-bold">지역별 카테고리</h3>
-                  <button onClick={addRegion} className="text-xs bg-primary text-white px-3 py-1.5 rounded-lg font-medium">+ 추가</button>
+                  <Button size="sm" onClick={addRegion}>+ 추가</Button>
                 </div>
                 {regions.map((c, i) => (
                   <div key={`${c}-${i}`} className="flex items-center justify-between py-2 border-b border-gray-50">
@@ -1140,7 +1143,7 @@ export default function AdminWeb() {
             <div className="mt-6 bg-white rounded-xl shadow-sm p-4">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="text-sm font-bold">홈 추천 검색어</h3>
-                <button onClick={addHomeKeyword} className="text-xs bg-primary text-white px-3 py-1.5 rounded-lg font-medium">+ 추가</button>
+                <Button size="sm" onClick={addHomeKeyword}>+ 추가</Button>
               </div>
               <p className="text-[11px] text-gray-500 mb-3">
                 소비자 홈 상단 검색창 아래 칩으로 노출됩니다. 칩 클릭 시 카테고리 탭으로 이동하며,
